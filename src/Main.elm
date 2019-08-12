@@ -1,31 +1,69 @@
-import Browser
-import Html exposing (Html, button, div, text)
+module Main exposing (Model, Msg(..), Skills, init, initSkills, main, update, view)
 
-main = Browser.sandbox { init = init, update= update, view = view }
+import Browser
+import Html exposing (Html, button, div, text, span)
+
+
+main =
+    Browser.sandbox { init = init, update = update, view = view }
 
 -- MODEL
 
-type alias Model = Int
+
+type alias Skills =
+    List String
+
+
+type alias Model =
+    { skills : Skills
+    }
+
+
+initSkills : Skills
+initSkills =
+    [ "Javascript"
+    , "Angular"
+    , "Reactive Programming"
+    , "PHP"
+    , "Python"
+    , "Node.js"
+    , "Jenkins"
+    , "Docker"
+    , "Gitlab-CI"
+    , "Redis"
+    , "Haproxy"
+    ]
+
 
 init : Model
+init =
+    { skills = initSkills
+    }
 
-init = 0
+
 
 -- UPDATE
 
-type Msg = Increment
+
+type Msg
+    = NoOp
+
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        Increment ->
-            model + 1
+        NoOp ->
+            model
+
+
 
 -- VIEW
 
-view: Model -> Html Msg
+
+view : Model -> Html Msg
 view model =
     div []
-        [ button [] [ text "TOTO "]
-        ]
-
+        (List.map
+            (\skill -> span [] [ text skill ])
+            model.skills
+        )
