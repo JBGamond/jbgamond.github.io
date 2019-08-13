@@ -6,7 +6,8 @@ import Html.Lazy exposing (lazy)
 import Intro
 
 
-main = Browser.sandbox { init = init, update = update, view = view }
+main =
+    Browser.element { init = init, update = update, view = view, subscriptions = subscriptions }
 
 
 
@@ -38,10 +39,17 @@ initSkills =
     ]
 
 
-init : Model
-init =
+initModel : Model
+initModel =
     { skills = initSkills
     }
+
+
+init : () -> ( Model, Cmd Msg )
+init _ =
+    ( initModel
+    , Cmd.none
+    )
 
 
 
@@ -52,11 +60,20 @@ type Msg
     = NoOp
 
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         NoOp ->
-            model
+            ( model, Cmd.none )
+
+
+
+-- SUBSCRIPTIONS
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Sub.none
 
 
 
@@ -67,24 +84,11 @@ view : Model -> Html Msg
 view model =
     div []
         [ section []
-            [ intro ]
+            [ Intro.intro ]
         , section
             []
             (List.map
                 (\skill -> span [] [ text skill ])
                 model.skills
             )
-        ]
-
-intro =
-    div []
-        [ h1
-            []
-            [ text "Jean-Baptiste Gamond" ]
-        , h2
-            []
-            [ text "Software Engineer" ]
-        , span
-            []
-            [ text "Hi, I'm a software engineer specialised in web technologies. I love solving problems, be it designing the artchitecture of a new web app, creating complex algorithms, fixing performance issues or working on user experience. I hate doing the same job everyday, so please don't ask me to do another sign up form! I love learning new stuff, so much that even this website is an excuse for trying out Elm" ]
         ]
