@@ -4390,9 +4390,34 @@ var elm$core$Set$toList = function (_n0) {
 	var dict = _n0.a;
 	return elm$core$Dict$keys(dict);
 };
+var author$project$Experiences$experiences = _List_fromArray(
+	[
+		{
+		company: 'LivingObjects',
+		dates: 'June 2017 - Now',
+		description: 'To be continued',
+		relatedSkills: _List_fromArray(
+			['Angular', 'Javascript', 'Redis', 'Reactive Programing', 'Python', 'Jenkins', 'Gitlab-CI', 'Haproxy', 'PHP', 'Docker', 'Symfony'])
+	},
+		{
+		company: 'GFI Informatique',
+		dates: 'Sept. 2015 - May 2017',
+		description: 'To be continued',
+		relatedSkills: _List_fromArray(
+			['Javascript', 'PHP', 'Redis', 'WebRTC', 'Python', 'Node.js'])
+	},
+		{
+		company: 'Alcatel-Lucent (apprenticeship)',
+		dates: 'Sept. 2012 - Sept. 2015',
+		description: 'You wish you knew',
+		relatedSkills: _List_fromArray(
+			['Javascript', 'PHP', 'Python', 'Jenkins'])
+	}
+	]);
 var author$project$Main$initSkills = _List_fromArray(
-	['Javascript', 'Angular', 'Reactive Programming', 'PHP', 'Python', 'Node.js', 'Jenkins', 'Docker', 'Gitlab-CI', 'Redis', 'Haproxy']);
-var author$project$Main$initModel = {skills: author$project$Main$initSkills};
+	['Javascript', 'Angular', 'Reactive Programing', 'PHP', 'Python', 'Node.js', 'Jenkins', 'Docker', 'Gitlab-CI', 'Redis', 'Haproxy', 'WebRTC', 'Symfony']);
+var elm$core$Maybe$Nothing = {$: 'Nothing'};
+var author$project$Main$initModel = {experiences: author$project$Experiences$experiences, highlighted: elm$core$Maybe$Nothing, skills: author$project$Main$initSkills};
 var elm$core$Basics$False = {$: 'False'};
 var elm$core$Basics$True = {$: 'True'};
 var elm$core$Result$isOk = function (result) {
@@ -4576,7 +4601,6 @@ var elm$core$Array$initialize = F2(
 var elm$core$Maybe$Just = function (a) {
 	return {$: 'Just', a: a};
 };
-var elm$core$Maybe$Nothing = {$: 'Nothing'};
 var elm$core$Result$Err = function (a) {
 	return {$: 'Err', a: a};
 };
@@ -4800,7 +4824,25 @@ var author$project$Main$subscriptions = function (model) {
 };
 var author$project$Main$update = F2(
 	function (msg, model) {
-		return _Utils_Tuple2(model, elm$core$Platform$Cmd$none);
+		switch (msg.$) {
+			case 'NoOp':
+				return _Utils_Tuple2(model, elm$core$Platform$Cmd$none);
+			case 'HighlighExperience':
+				var exp = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							highlighted: elm$core$Maybe$Just(exp)
+						}),
+					elm$core$Platform$Cmd$none);
+			default:
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{highlighted: elm$core$Maybe$Nothing}),
+					elm$core$Platform$Cmd$none);
+		}
 	});
 var elm$core$Basics$identity = function (x) {
 	return x;
@@ -4823,36 +4865,76 @@ var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 var elm$html$Html$div = _VirtualDom_node('div');
 var elm$html$Html$h1 = _VirtualDom_node('h1');
 var elm$html$Html$h2 = _VirtualDom_node('h2');
+var elm$html$Html$img = _VirtualDom_node('img');
 var elm$html$Html$span = _VirtualDom_node('span');
 var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
+var elm$json$Json$Encode$string = _Json_wrap;
+var elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			elm$json$Json$Encode$string(string));
+	});
+var elm$html$Html$Attributes$class = elm$html$Html$Attributes$stringProperty('className');
+var elm$html$Html$Attributes$src = function (url) {
+	return A2(
+		elm$html$Html$Attributes$stringProperty,
+		'src',
+		_VirtualDom_noJavaScriptOrHtmlUri(url));
+};
 var author$project$Intro$intro = A2(
 	elm$html$Html$div,
-	_List_Nil,
+	_List_fromArray(
+		[
+			elm$html$Html$Attributes$class('info')
+		]),
 	_List_fromArray(
 		[
 			A2(
-			elm$html$Html$h1,
-			_List_Nil,
+			elm$html$Html$img,
 			_List_fromArray(
 				[
-					elm$html$Html$text('Jean-Baptiste Gamond')
-				])),
+					elm$html$Html$Attributes$src('pic.png'),
+					elm$html$Html$Attributes$class('profilepic')
+				]),
+			_List_Nil),
 			A2(
-			elm$html$Html$h2,
-			_List_Nil,
+			elm$html$Html$div,
 			_List_fromArray(
 				[
-					elm$html$Html$text('Software Engineer')
-				])),
-			A2(
-			elm$html$Html$span,
-			_List_Nil,
+					elm$html$Html$Attributes$class('infotext')
+				]),
 			_List_fromArray(
 				[
-					elm$html$Html$text('Hi, I\'m a software engineer specialised in web technologies. I love solving problems, be it designing the artchitecture of a new web app, creating complex algorithms, fixing performance issues or working on user experience. I hate doing the same job everyday, so please don\'t ask me to do another sign up form! I love learning new stuff, so much that even this website is an excuse for trying out Elm')
+					A2(
+					elm$html$Html$h1,
+					_List_Nil,
+					_List_fromArray(
+						[
+							elm$html$Html$text('Jean-Baptiste Gamond')
+						])),
+					A2(
+					elm$html$Html$h2,
+					_List_Nil,
+					_List_fromArray(
+						[
+							elm$html$Html$text('Software Engineer')
+						])),
+					A2(
+					elm$html$Html$span,
+					_List_Nil,
+					_List_fromArray(
+						[
+							elm$html$Html$text('Hi, I\'m a software engineer specialised in web technologies. I love solving problems, be it designing the artchitecture of a new web app, creating complex algorithms, fixing performance issues or working on user experience. I hate doing the same job everyday, so please don\'t ask me to do another sign up form! I love learning new stuff, so much that even this website is an excuse for trying out Elm.')
+						]))
 				]))
 		]));
+var author$project$Main$HighlighExperience = function (a) {
+	return {$: 'HighlighExperience', a: a};
+};
+var author$project$Main$RemoveHighlight = {$: 'RemoveHighlight'};
 var elm$core$List$foldrHelper = F4(
 	function (fn, acc, ctr, ls) {
 		if (!ls.b) {
@@ -4922,33 +5004,190 @@ var elm$core$List$map = F2(
 			_List_Nil,
 			xs);
 	});
+var elm$html$Html$h4 = _VirtualDom_node('h4');
+var elm$html$Html$li = _VirtualDom_node('li');
+var elm$html$Html$p = _VirtualDom_node('p');
+var elm$html$Html$ul = _VirtualDom_node('ul');
+var elm$virtual_dom$VirtualDom$Normal = function (a) {
+	return {$: 'Normal', a: a};
+};
+var elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
+var elm$html$Html$Events$on = F2(
+	function (event, decoder) {
+		return A2(
+			elm$virtual_dom$VirtualDom$on,
+			event,
+			elm$virtual_dom$VirtualDom$Normal(decoder));
+	});
+var elm$html$Html$Events$onMouseOut = function (msg) {
+	return A2(
+		elm$html$Html$Events$on,
+		'mouseout',
+		elm$json$Json$Decode$succeed(msg));
+};
+var elm$html$Html$Events$onMouseOver = function (msg) {
+	return A2(
+		elm$html$Html$Events$on,
+		'mouseover',
+		elm$json$Json$Decode$succeed(msg));
+};
+var author$project$Main$viewExperiences = function (model) {
+	return A2(
+		elm$html$Html$ul,
+		_List_fromArray(
+			[
+				elm$html$Html$Attributes$class('experienceList')
+			]),
+		A2(
+			elm$core$List$map,
+			function (exp) {
+				return A2(
+					elm$html$Html$li,
+					_List_fromArray(
+						[
+							elm$html$Html$Attributes$class('experience'),
+							elm$html$Html$Events$onMouseOver(
+							author$project$Main$HighlighExperience(exp)),
+							elm$html$Html$Events$onMouseOut(author$project$Main$RemoveHighlight)
+						]),
+					_List_fromArray(
+						[
+							A2(
+							elm$html$Html$h4,
+							_List_Nil,
+							_List_fromArray(
+								[
+									elm$html$Html$text(exp.company),
+									A2(
+									elm$html$Html$p,
+									_List_Nil,
+									_List_fromArray(
+										[
+											elm$html$Html$text(exp.dates)
+										]))
+								])),
+							A2(
+							elm$html$Html$p,
+							_List_Nil,
+							_List_fromArray(
+								[
+									elm$html$Html$text(exp.description)
+								]))
+						]));
+			},
+			model));
+};
+var elm$core$List$any = F2(
+	function (isOkay, list) {
+		any:
+		while (true) {
+			if (!list.b) {
+				return false;
+			} else {
+				var x = list.a;
+				var xs = list.b;
+				if (isOkay(x)) {
+					return true;
+				} else {
+					var $temp$isOkay = isOkay,
+						$temp$list = xs;
+					isOkay = $temp$isOkay;
+					list = $temp$list;
+					continue any;
+				}
+			}
+		}
+	});
+var author$project$Main$viewSkill = F2(
+	function (skill, exp) {
+		var highlightClass = function () {
+			if (exp.$ === 'Nothing') {
+				return '';
+			} else {
+				var realExp = exp.a;
+				return A2(
+					elm$core$List$any,
+					function (relatedExp) {
+						return _Utils_eq(relatedExp, skill);
+					},
+					realExp.relatedSkills) ? 'highlightSkill' : '';
+			}
+		}();
+		return A2(
+			elm$html$Html$span,
+			_List_fromArray(
+				[
+					elm$html$Html$Attributes$class(highlightClass)
+				]),
+			_List_fromArray(
+				[
+					elm$html$Html$text(skill)
+				]));
+	});
+var author$project$Main$viewSkillList = F2(
+	function (skills, exp) {
+		return A2(
+			elm$core$List$map,
+			function (skill) {
+				return A2(author$project$Main$viewSkill, skill, exp);
+			},
+			skills);
+	});
+var elm$html$Html$h3 = _VirtualDom_node('h3');
 var elm$html$Html$section = _VirtualDom_node('section');
 var author$project$Main$view = function (model) {
 	return A2(
 		elm$html$Html$div,
-		_List_Nil,
+		_List_fromArray(
+			[
+				elm$html$Html$Attributes$class('mainContainer')
+			]),
 		_List_fromArray(
 			[
 				A2(
-				elm$html$Html$section,
-				_List_Nil,
+				elm$html$Html$div,
 				_List_fromArray(
-					[author$project$Intro$intro])),
+					[
+						elm$html$Html$Attributes$class('sideContainer')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						elm$html$Html$section,
+						_List_Nil,
+						_List_fromArray(
+							[author$project$Intro$intro])),
+						A2(
+						elm$html$Html$section,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								elm$html$Html$h3,
+								_List_Nil,
+								_List_fromArray(
+									[
+										elm$html$Html$text('Skills')
+									])),
+								A2(
+								elm$html$Html$div,
+								_List_fromArray(
+									[
+										elm$html$Html$Attributes$class('skills')
+									]),
+								A2(author$project$Main$viewSkillList, model.skills, model.highlighted))
+							]))
+					])),
 				A2(
-				elm$html$Html$section,
-				_List_Nil,
-				A2(
-					elm$core$List$map,
-					function (skill) {
-						return A2(
-							elm$html$Html$span,
-							_List_Nil,
-							_List_fromArray(
-								[
-									elm$html$Html$text(skill)
-								]));
-					},
-					model.skills))
+				elm$html$Html$div,
+				_List_fromArray(
+					[
+						elm$html$Html$Attributes$class('sideContainer')
+					]),
+				_List_fromArray(
+					[
+						author$project$Main$viewExperiences(model.experiences)
+					]))
 			]));
 };
 var elm$browser$Browser$External = function (a) {

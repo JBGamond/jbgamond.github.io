@@ -1,16 +1,19 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <title>Main</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
   <script src="build/elm.js"></script>
 </head>
 
-<body id="elm">
-  <script>
+<body>
+  <div id="elm"></div>
+</body>
+<script>
   var app = Elm.Main.init({
     node: document.getElementById('elm')
   });
-  </script>
-</body>
+</script>
 </html>
