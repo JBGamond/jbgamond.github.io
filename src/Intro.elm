@@ -1,47 +1,14 @@
-port module Main exposing (..)
+module Intro exposing (..)
 
-import Browser
 import Html exposing (..)
-import Html.Lazy exposing (lazy)
-import Intro
-
-
-main = Browser.sandbox { init = init, update = update, view = view }
 
 
 
 -- MODEL
 
 
-type alias Skills =
-    List String
-
-
 type alias Model =
-    { skills : Skills
-    }
-
-
-initSkills : Skills
-initSkills =
-    [ "Javascript"
-    , "Angular"
-    , "Reactive Programming"
-    , "PHP"
-    , "Python"
-    , "Node.js"
-    , "Jenkins"
-    , "Docker"
-    , "Gitlab-CI"
-    , "Redis"
-    , "Haproxy"
-    ]
-
-
-init : Model
-init =
-    { skills = initSkills
-    }
+    {}
 
 
 
@@ -65,18 +32,6 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ section []
-            [ intro ]
-        , section
-            []
-            (List.map
-                (\skill -> span [] [ text skill ])
-                model.skills
-            )
-        ]
-
-intro =
     div []
         [ h1
             []
