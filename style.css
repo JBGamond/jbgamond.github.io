@@ -4,6 +4,7 @@ body {
 }
 
 body {
+    margin: 0;
     background: #282828;
     color: #dadada;
     font-family: Arial, Helvetica, sans-serif;
@@ -12,20 +13,18 @@ body {
 .mainContainer {
     min-width: 800px;
     width: 80%;
-    margin: 15px auto;
+    padding: 15px 0;
+    margin: 0 auto;
     height: calc(100% - 30px);
     display: flex;
+    flex-wrap: wrap;
 }
 
 .sideContainer {
-    width: 50%;
+    width: 48%;
     padding: 10px;
     display: flex;
     flex-direction: column;
-}
-
-.sideContainer:nth-child(1){
-    border-right: 1px solid;
 }
 
 .sideContainer section {
@@ -78,4 +77,28 @@ body {
 
 .highlightSkill {
     color: orange;
+}
+
+.experienceList {
+    border-top: 1px solid;
+}
+
+.separator {
+    height: 100%;
+    width: 1px;
+    background: #dadada;
+}
+
+@media screen and (max-width: 1314px) {
+    .separator{
+        display: none;
+    }
+
+    .mainContainer {
+        height: auto;
+    }
+
+    .sideContainer {
+        width: 100%;
+    }
 }

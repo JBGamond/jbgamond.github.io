@@ -4414,10 +4414,10 @@ var author$project$Experiences$experiences = _List_fromArray(
 			['Javascript', 'PHP', 'Python', 'Jenkins'])
 	}
 	]);
-var author$project$Main$initSkills = _List_fromArray(
-	['Javascript', 'Angular', 'Reactive Programing', 'PHP', 'Python', 'Node.js', 'Jenkins', 'Docker', 'Gitlab-CI', 'Redis', 'Haproxy', 'WebRTC', 'Symfony']);
+var author$project$Skills$initSkills = _List_fromArray(
+	['Javascript', 'Angular', 'Reactive Programing', 'PHP', 'Python', 'Node.js', 'Jenkins', 'Docker', 'Gitlab-CI', 'Redis', 'Haproxy', 'WebRTC', 'Symfony', 'Elm 🙃']);
 var elm$core$Maybe$Nothing = {$: 'Nothing'};
-var author$project$Main$initModel = {experiences: author$project$Experiences$experiences, highlighted: elm$core$Maybe$Nothing, skills: author$project$Main$initSkills};
+var author$project$Main$initModel = {experiences: author$project$Experiences$experiences, highlighted: elm$core$Maybe$Nothing, skills: author$project$Skills$initSkills};
 var elm$core$Basics$False = {$: 'False'};
 var elm$core$Basics$True = {$: 'True'};
 var elm$core$Result$isOk = function (result) {
@@ -5182,10 +5182,24 @@ var author$project$Main$view = function (model) {
 				elm$html$Html$div,
 				_List_fromArray(
 					[
+						elm$html$Html$Attributes$class('separator')
+					]),
+				_List_Nil),
+				A2(
+				elm$html$Html$div,
+				_List_fromArray(
+					[
 						elm$html$Html$Attributes$class('sideContainer')
 					]),
 				_List_fromArray(
 					[
+						A2(
+						elm$html$Html$h3,
+						_List_Nil,
+						_List_fromArray(
+							[
+								elm$html$Html$text('Experiences')
+							])),
 						author$project$Main$viewExperiences(model.experiences)
 					]))
 			]));

@@ -4,9 +4,10 @@ import Browser
 import Experiences
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onMouseOver, onMouseOut)
+import Html.Events exposing (onMouseOut, onMouseOver)
 import Html.Lazy exposing (lazy)
 import Intro
+import Skills
 
 
 main =
@@ -16,39 +17,16 @@ main =
 
 -- MODEL
 
-
-type alias Skills =
-    List String
-
-
 type alias Model =
-    { skills : Skills
+    { skills : Skills.SkillList
     , experiences : Experiences.Experiences
     , highlighted : Maybe Experiences.Experience
     }
 
 
-initSkills : Skills
-initSkills =
-    [ "Javascript"
-    , "Angular"
-    , "Reactive Programing"
-    , "PHP"
-    , "Python"
-    , "Node.js"
-    , "Jenkins"
-    , "Docker"
-    , "Gitlab-CI"
-    , "Redis"
-    , "Haproxy"
-    , "WebRTC"
-    , "Symfony"
-    ]
-
-
 initModel : Model
 initModel =
-    { skills = initSkills
+    { skills = Skills.initSkills
     , experiences = Experiences.experiences
     , highlighted = Nothing
     }
@@ -84,6 +62,7 @@ update msg model =
             ( { model | highlighted = Nothing }, Cmd.none )
 
 
+
 -- SUBSCRIPTIONS
 
 
@@ -110,13 +89,16 @@ view model =
                     (viewSkillList model.skills model.highlighted)
                 ]
             ]
+        , div [ class "separator" ] []
         , div
             [ class "sideContainer" ]
-            [ viewExperiences model.experiences ]
+            [ h3 [] [ text "Experiences" ]
+            , viewExperiences model.experiences
+            ]
         ]
 
 
-viewSkillList : Skills -> Maybe Experiences.Experience -> List (Html Msg)
+viewSkillList : Skills.SkillList -> Maybe Experiences.Experience -> List (Html Msg)
 viewSkillList skills exp =
     List.map
         (\skill -> viewSkill skill exp)
@@ -148,7 +130,7 @@ viewExperiences model =
         (List.map
             (\exp ->
                 li
-                    [ class "experience", onMouseOver (HighlighExperience exp), onMouseOut (RemoveHighlight) ]
+                    [ class "experience", onMouseOver (HighlighExperience exp), onMouseOut RemoveHighlight ]
                     [ h4 [] [ text exp.company, p [] [ text exp.dates ] ]
                     , p [] [ text exp.description ]
                     ]
