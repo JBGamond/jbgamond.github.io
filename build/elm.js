@@ -4920,7 +4920,7 @@ var author$project$Intro$intro = A2(
 					_List_Nil,
 					_List_fromArray(
 						[
-							elm$html$Html$text('Software Engineer')
+							elm$html$Html$text('Web Engineer')
 						])),
 					A2(
 					elm$html$Html$span,
