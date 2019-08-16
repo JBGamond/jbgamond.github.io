@@ -4395,21 +4395,21 @@ var author$project$Experiences$experiences = _List_fromArray(
 		{
 		company: 'LivingObjects',
 		dates: 'June 2017 - Now',
-		description: 'To be continued',
+		description: '',
 		relatedSkills: _List_fromArray(
 			['Angular', 'Javascript', 'Redis', 'Reactive Programing', 'Python', 'Jenkins', 'Gitlab-CI', 'Haproxy', 'PHP', 'Docker', 'Symfony'])
 	},
 		{
 		company: 'GFI Informatique',
 		dates: 'Sept. 2015 - May 2017',
-		description: 'To be continued',
+		description: '',
 		relatedSkills: _List_fromArray(
 			['Javascript', 'PHP', 'Redis', 'WebRTC', 'Python', 'Node.js'])
 	},
 		{
 		company: 'Alcatel-Lucent (apprenticeship)',
 		dates: 'Sept. 2012 - Sept. 2015',
-		description: 'You wish you knew',
+		description: '',
 		relatedSkills: _List_fromArray(
 			['Javascript', 'PHP', 'Python', 'Jenkins'])
 	}
